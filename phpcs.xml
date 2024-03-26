@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See http://pear.php.net/manual/en/package.php.php-codesniffer.annotated-ruleset.php -->
+<ruleset name="laravel-boilerplate-ruleset">
+    <description>Full cs for Laravel service</description>
+    <file>./app</file>
+
+    <!-- EXCLUDES -->
+    <exclude-pattern>*/bootstrap/*</exclude-pattern>
+    <exclude-pattern>*/public/*</exclude-pattern>
+    <exclude-pattern>*/resources/*</exclude-pattern>
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <!-- OPTIONS -->
+    <arg name="extensions" value="php"/>
+    <arg name="report" value="full"/>
+    <arg name="basepath" value="./"/>
+
+    <!-- DEFAULT CS RULES -->
+    <rule ref="PSR12"/>
+    <rule ref="PSR2"/>
+    <rule ref="PSR1"/>
+    <rule ref="PSR2.ControlStructures.ControlStructureSpacing">
+        <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace"/>
+    </rule>
+
+    <!-- EXTENDED RULES -->
+    <config name="installed_paths" value="../../slevomat/coding-standard"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
+    <!-- EXCLUDES -->
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>./tests</exclude-pattern>
+    </rule>
+</ruleset>
