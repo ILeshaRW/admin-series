@@ -1,13 +1,21 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $surname
+ * @property string $email
+ * @property ?string $parentname
+ * @property Role $role
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -20,7 +28,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'surname',
         'password',
+        'parentname',
     ];
 
     /**
@@ -42,4 +52,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

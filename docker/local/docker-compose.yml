@@ -1,9 +1,9 @@
 version: "3.5"
 
 volumes:
-  postgres_data:
+  postgres_ipr_admin_data:
     driver: local
-  redis_data:
+  redis_ipr_admin_data:
     driver: local
 
 services:
@@ -36,7 +36,7 @@ services:
     image: postgres:16
     restart: always
     volumes:
-      - "postgres_data:/var/lib/postgresql/data"
+      - postgres_ipr_admin_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
@@ -49,7 +49,7 @@ services:
     image: redis:7
     command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
     volumes:
-       - redis_data:/data
+       - redis_ipr_admin_data:/data
     networks:
       - default
 
