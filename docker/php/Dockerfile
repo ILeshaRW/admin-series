@@ -9,11 +9,13 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libonig-dev \
     libzip-dev \
+    libicu-dev \
     zip \
     unzip
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql pgsql
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install pdo pdo_pgsql pgsql intl
 
 # Install Redis
 RUN pecl install -o -f redis
