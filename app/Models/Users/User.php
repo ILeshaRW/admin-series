@@ -3,8 +3,7 @@
 namespace App\Models\Users;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use \Orchid\Platform\Models\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -14,7 +13,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $surname
  * @property string $email
  * @property ?string $parentname
- * @property Role $role
  */
 class User extends Authenticatable
 {
@@ -52,12 +50,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    /**
-     * @return BelongsTo
-     */
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
 }
