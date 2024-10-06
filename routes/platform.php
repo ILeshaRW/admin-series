@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\CountryListScreen;
+use App\Orchid\Screens\Films\FilmListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -77,4 +78,6 @@ Route::screen('roles', RoleListScreen::class)
         ->push(__('Roles'), route('platform.systems.roles')));
 
 Route::screen('project/countries', CountryListScreen::class)
-    ->name('countries.list');
+    ->name('platform.country.list');
+Route::screen('project/films', FilmListScreen::class)
+    ->name('platform.film.list');

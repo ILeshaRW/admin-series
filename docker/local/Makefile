@@ -19,7 +19,7 @@ setup: ## Начальная установка приложения
 	@cat '${__DIR__}../../.env.example' '${ENV_FILE}.example' > '${ENV_FILE}'
 	@'${DOCKER_COMPOSE}' build
 	@make up
-	@'${DOCKER_COMPOSE}' exec php composer install
+	@'${DOCKER_COMPOSE}' exec php composer install --ignore-platform-req=ext-zip
 	@'${DOCKER_COMPOSE}' exec php php artisan key:generate
 	@'${DOCKER_COMPOSE}' exec php php artisan migrate:fresh
 	@'${DOCKER_COMPOSE}' exec php php artisan db:seed

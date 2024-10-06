@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\Dictionaries\Country;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
@@ -41,20 +42,19 @@ class CountryListScreen extends Screen
             Layout::table('countries', [
                 TD::make('id'),
                 TD::make('name'),
-                TD::make('Delete')
-                    ->alignRight()
-                    ->render(function (Country $country) {
-                        return Button::make('Delete country')
-                            ->confirm('Вы уверены?')
-                            ->method('delete', ['country' => $country->id]);
-                    }),
-                TD::make('Update')
-                    ->alignRight()
-                    ->render(function (Country $country) {
-                        return ModalToggle::make('Update')
+                TD::make('Actions')
+                    ->render(fn (Country $country) => DropDown::make()
+                    ->icon('bs.three-dots-vertical')
+                    ->list([
+
+                        ModalToggle::make('Update')
                             ->modal('updateCountryModal')
-                            ->method('update', ['country' => $country->id]);
-                    }),
+                            ->method('update', ['country' => $country->id]),
+
+                        Button::make('Delete country')
+                            ->confirm('Вы уверены?')
+                            ->method('delete', ['country' => $country->id])
+                    ])),
 
             ]),
             Layout::modal('countryModal', Layout::rows([
